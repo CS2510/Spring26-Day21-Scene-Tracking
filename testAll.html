@@ -68,65 +68,40 @@
 </head>
 <body>
     <h1>All Tests &amp; Games</h1>
-    <div class="grid">
-        <div class="cell">
-            <h2>index</h2>
-            <iframe src="index.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>gameCards</h2>
-            <iframe src="gameCards.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>gameMerge</h2>
-            <iframe src="gameMerge.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>gamePlatform</h2>
-            <iframe src="gamePlatform.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>gameTopDown</h2>
-            <iframe src="gameTopDown.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>testEvent</h2>
-            <iframe src="testEvent.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>testInputEvents</h2>
-            <iframe src="testInputEvents.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>testLoadSceneAdditive</h2>
-            <iframe src="testLoadSceneAdditive.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>testMouseEvents</h2>
-            <iframe src="testMouseEvents.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>testPointPolygonCollisions</h2>
-            <iframe src="testPointPolygonCollisions.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>testPolygonPolygonCollisions</h2>
-            <iframe src="testPolygonPolygonCollisions.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>testRigidBodyAcceleration</h2>
-            <iframe src="testRigidBodyAcceleration.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>testSceneSwitch</h2>
-            <iframe src="testSceneSwitch.html"></iframe>
-        </div>
-        <div class="cell">
-            <h2>testTriggerEvents</h2>
-            <iframe src="testTriggerEvents.html"></iframe>
-        </div>
-    </div>
+    <div class="grid" id="grid"></div>
     <script>
+        const urls = [
+            'index.html',
+            'gameCards.html',
+            'gameMerge.html',
+            'gamePlatform.html',
+            'gameTopDown.html',
+            'testCamera.html',
+            'testEvent.html',
+            'testInputEvents.html',
+            'testLayers.html',
+            'testLoadSceneAdditive.html',
+            'testMouseEvents.html',
+            'testPointPolygonCollisions.html',
+            'testPolygonPolygonCollisions.html',
+            'testRigidBodyAcceleration.html',
+            'testSceneSwitch.html',
+            'testTriggerEvents.html',
+        ];
+
+        const grid = document.getElementById('grid');
+        urls.forEach(src => {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            const h2 = document.createElement('h2');
+            h2.textContent = src.replace('.html', '');
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('src', src);
+            cell.appendChild(h2);
+            cell.appendChild(iframe);
+            grid.appendChild(cell);
+        });
+
         // Listen for error messages posted from iframes
         window.addEventListener('message', e => {
             if (e.data && e.data.type === '__iframe_error__') {
@@ -137,6 +112,7 @@
                 line.textContent = e.data.message;
                 overlay.appendChild(line);
                 overlay.classList.add('visible');
+                document.title = 'Error';
             }
         });
 
